@@ -2,44 +2,47 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Convertidor de Imagen a PDF Gratis
-    </title>
+    <title>PDF PRO - TEST</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f4f4f9; }
-        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; }
-        button { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; }
+        body { 
+            background: url('https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=1600') no-repeat center center fixed; 
+            background-size: cover;
+            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;
+        }
+        .caja {
+            background: rgba(255,255,255,0.9); /* Blanco casi sólido para que se vea bien */
+            padding: 40px; border-radius: 20px; text-align: center; color: black;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        input, button { display: block; width: 100%; margin: 20px 0; padding: 10px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>Convertir Imagen a PDF</h1>
-        <p>Sube tu foto y descárgala como PDF al instante.</p>
-        <input type="file" id="imageInput" accept="image/*"><br><br>
-        <button onclick="convertirAPDF()">Descargar PDF</button>
+
+    <div class="caja">
+        <h1 style="margin:0">PDF PRO</h1>
+        <p>Selecciona tu imagen abajo:</p>
+        
+        <input type="file" id="archivo" accept="image/*">
+        <button onclick="descargar()">DESCARGAR PDF</button>
     </div>
 
     <script>
-        async function convertirAPDF() {
-            const { jsPDF } = window.jspdf;
-            const input = document.getElementById('imageInput');
+        function descargar() {
+            const input = document.getElementById('archivo');
+            if (input.files.length === 0) { alert("Elige una imagen"); return; }
             
-            if (input.files.length === 0) {
-                alert("Por favor, selecciona una imagen primero.");
-                return;
-            }
-
-            const file = input.files[0];
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
             const reader = new FileReader();
-
+            
             reader.onload = function(e) {
-                const imgData = e.target.result;
-                const pdf = new jsPDF();
-                // Añade la imagen al PDF (ajustando un poco el tamaño)
-                pdf.addImage(imgData, 'JPEG', 10, 10, 180, 160);
-                pdf.save("mi-documento.pdf");
-            };
-            reader.readAsDataURL(file);
+                doc.addImage(e.target.result, 'JPEG', 10, 10, 180, 150);
+                doc.save("archivo.pdf");
+            }
+            reader.readAsDataURL(input.files[0]);
         }
     </script>
 </body>
