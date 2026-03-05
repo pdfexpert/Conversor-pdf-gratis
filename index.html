@@ -2,48 +2,55 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>PDF PRO - TEST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>PDF PRO | Convertidor de Imágenes a PDF Gratis y Seguro</title>
+    <meta name="description" content="Convierte múltiples imágenes JPG, PNG o WebP a un solo PDF profesional en segundos. Totalmente gratuito y privado.">
+    <meta name="keywords" content="convertir imagen a pdf, pdf pro, jpg a pdf gratis, unir imagenes en pdf">
+    
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/337/337946.png" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --text-main: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body { 
-            background: url('https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=1600') no-repeat center center fixed; 
+            font-family: 'Montserrat', sans-serif; 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1600');
             background-size: cover;
-            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
         }
-        .caja {
-            background: rgba(255,255,255,0.9); /* Blanco casi sólido para que se vea bien */
-            padding: 40px; border-radius: 20px; text-align: center; color: black;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        input, button { display: block; width: 100%; margin: 20px 0; padding: 10px; }
-        button { background: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
-    </style>
-</head>
-<body>
 
-    <div class="caja">
-        <h1 style="margin:0">PDF PRO</h1>
-        <p>Selecciona tu imagen abajo:</p>
-        
-        <input type="file" id="archivo" accept="image/*">
-        <button onclick="descargar()">DESCARGAR PDF</button>
-    </div>
-
-    <script>
-        function descargar() {
-            const input = document.getElementById('archivo');
-            if (input.files.length === 0) { alert("Elige una imagen"); return; }
-            
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                doc.addImage(e.target.result, 'JPEG', 10, 10, 180, 150);
-                doc.save("archivo.pdf");
-            }
-            reader.readAsDataURL(input.files[0]);
+        /* Contenedor Principal */
+        .main-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
         }
-    </script>
-</body>
-</html>
+
+        .brand { font-size: 42px; font-weight: 800; background: linear-gradient(to right, #a5b4fc, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
+        .tagline { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #cbd5e1; margin-bottom:
